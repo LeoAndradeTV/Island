@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     public static PlayerInput Instance { get; private set; }
+    public bool IsInteracting { get; private set; }
 
     private PlayerInputActions inputActions;
 
@@ -20,6 +21,18 @@ public class PlayerInput : MonoBehaviour
     {
         inputActions = new PlayerInputActions();
         inputActions.Player.Enable();
+        inputActions.Player.Interact.performed += Interact_performed;
+        inputActions.Player.Interact.canceled += Interact_canceled;
+    }
+
+    private void Interact_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        IsInteracting = false;
+    }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        IsInteracting = true;
     }
 
     public Vector3 GetMovementInput()
