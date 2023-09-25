@@ -9,6 +9,7 @@ public class CollisionDetector : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out ICollectable collectable))
         {
             collectable.GainBenefit();
+            collectable.DestroyCollectable();
         }
     }
 }

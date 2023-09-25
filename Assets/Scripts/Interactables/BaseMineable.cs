@@ -14,14 +14,21 @@ public class BaseMineable : MonoBehaviour, IMineable
     protected MeshRenderer meshRenderer;
     protected Material startingMaterial;
 
-    protected float mineTimer = 2.7f;
+    protected float mineTimer;
     private float currentTimer;
+
+    private void OnEnable()
+    {
+        InitializeMineable();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         progressBarBg.gameObject.SetActive(false);
     }
+
+    public virtual void InitializeMineable() { }
 
     public void Interact()
     {
@@ -44,7 +51,6 @@ public class BaseMineable : MonoBehaviour, IMineable
 
     public void OnHoverEnter()
     {
-        Debug.Log("Hovering");
         meshRenderer.material = highlightedMaterial;
     }
 
@@ -54,12 +60,25 @@ public class BaseMineable : MonoBehaviour, IMineable
     }
 
     public void Mine()
-    {
+    {   
         for (int i = 0; i < amountToInstantiate; i++)
         {
-            GameObject inst = Instantiate(objectsToInstantiate, transform.position, objectsToInstantiate.transform.rotation);
-            inst.GetComponent<Rigidbody>().AddForce(GetMineDirection(), ForceMode.Impulse);
+            PooledObject obj = PullAndSetPooledObject();
+            
+            obj.GetComponent<Rigidbody>().AddForce(GetMineDirection(), ForceMode.Impulse);
         }
+    }
+
+    private PooledObject PullAndSetPooledObject()
+    {
+        ObjectPool pool = GetComponent<ObjectPool>();
+        PooledObject obj = pool.GetPooledObject();
+        Rigidbody objRb = obj.GetComponent<Rigidbody>();
+        objRb.velocity = Vector3.zero;
+        objRb.transform.position = gameObject.transform.position;
+        obj.gameObject.SetActive(true);
+        return obj;
+
     }
 
     private Vector3 GetMineDirection()

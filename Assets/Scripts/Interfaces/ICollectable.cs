@@ -6,4 +6,5 @@ public interface ICollectable
     void GainBenefit();
     void SetCollectTransform(Transform collectorTransform);
     void IdleBehaviour();
+    void DestroyCollectable();
 }

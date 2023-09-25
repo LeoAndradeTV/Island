@@ -36,7 +36,6 @@ public class Coin : MonoBehaviour, ICollectable
     public void GainBenefit()
     {
         Debug.Log($"Gained 1 coin");
-        Destroy(gameObject);
     }
 
     public void SetCollectTransform(Transform collectorTransform)
@@ -47,5 +46,16 @@ public class Coin : MonoBehaviour, ICollectable
     public void IdleBehaviour()
     {
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+    }
+
+    public void DestroyCollectable()
+    {
+        if (gameObject.TryGetComponent(out PooledObject pooledObject))
+        {
+            pooledObject.DestroyPooledObject();
+            return;
+        }
+
+        Destroy(gameObject);
     }
 }

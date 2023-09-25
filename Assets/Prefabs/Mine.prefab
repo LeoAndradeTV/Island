@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 7393213455443352307}
   - component: {fileID: 5436743747584613483}
   - component: {fileID: 641835992455545027}
+  - component: {fileID: 3727671695713934493}
   m_Layer: 6
   m_Name: Mine
   m_TagString: Untagged
@@ -199,6 +200,19 @@ MonoBehaviour:
   highlightedMaterial: {fileID: 2100000, guid: 615544309ec22654abcb8c56ebfcb762, type: 2}
   progressBarRect: {fileID: 4102620474235933645}
   progressBarBg: {fileID: 4047853670444355951}
+--- !u!114 &3727671695713934493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487826358622496560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd3ecc24debed34586ae168728f4085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: -6056997421051916837, guid: fae505391c5f8d544a5196671c5bdcc3, type: 3}
 --- !u!1 &3659314678115164863
 GameObject:
   m_ObjectHideFlags: 0

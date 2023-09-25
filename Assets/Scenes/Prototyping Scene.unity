@@ -865,6 +865,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6880168880009898969, guid: e28492c9e7c2efd4f8ffe517a2506293, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 8832741965608792397, guid: e28492c9e7c2efd4f8ffe517a2506293, type: 3}
       propertyPath: m_Radius
       value: 2.5

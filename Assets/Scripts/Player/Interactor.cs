@@ -26,11 +26,11 @@ public class Interactor : MonoBehaviour
             if (currentInteractable != null )
             {
                 currentInteractable.OnHoverEnter();
+                currentInteractable.ShowInteractableUI();
 
                 if (PlayerInput.Instance.IsInteracting)
                 {
-                    currentInteractable.Interact();
-                    currentInteractable.ShowInteractableUI();
+                    currentInteractable.Interact(); 
                 }
             }
             
