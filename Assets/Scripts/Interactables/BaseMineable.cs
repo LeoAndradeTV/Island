@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class BaseMineable : MonoBehaviour, IMineable
 {
-    [SerializeField] protected GameObject objectsToInstantiate;
     [SerializeField] protected int amountToInstantiate;
     [SerializeField] protected Material highlightedMaterial;
     [SerializeField] protected RectTransform progressBarRect;
