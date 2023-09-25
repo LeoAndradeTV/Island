@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour, ICollectable
 {
-    private Transform playerTransform;
+    [SerializeField] private float rotationSpeed = 5f;
 
+    private Transform playerTransform;
     private Rigidbody coinRb;
 
     private bool isCollected;
@@ -19,6 +20,7 @@ public class Coin : MonoBehaviour, ICollectable
     // Update is called once per frame
     void Update()
     {
+        IdleBehaviour();
         if (isCollected)
         {
             Vector3 moveDir = playerTransform.position - transform.position;
@@ -40,5 +42,10 @@ public class Coin : MonoBehaviour, ICollectable
     public void SetCollectTransform(Transform collectorTransform)
     {
         playerTransform = collectorTransform;
+    }
+
+    public void IdleBehaviour()
+    {
+        transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
     }
 }

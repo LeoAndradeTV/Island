@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Interactor : MonoBehaviour
 {
     [SerializeField] private LayerMask interableLayer;
+    [SerializeField] private float interactionSphereRadius;
+    [SerializeField] private float interactionSphereMaxDistance;
 
-    private IInteractable currentMineable;
+    private IInteractable currentInteractable;
 
     // Start is called before the first frame update
     void Start()
@@ -17,17 +20,17 @@ public class Interactor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.SphereCast(transform.position, 2f, transform.forward, out RaycastHit hit, 2f, interableLayer))
+        if (Physics.SphereCast(transform.position, interactionSphereRadius, transform.forward, out RaycastHit hit, interactionSphereMaxDistance, interableLayer))
         {
-            Debug.Log("Colliding");
-            currentMineable = hit.transform.GetComponent<IInteractable>();
-            if (currentMineable != null )
+            currentInteractable = hit.transform.GetComponent<IInteractable>();
+            if (currentInteractable != null )
             {
-                currentMineable.OnHoverEnter();
+                currentInteractable.OnHoverEnter();
 
                 if (PlayerInput.Instance.IsInteracting)
                 {
-                    currentMineable.Interact();
+                    currentInteractable.Interact();
+                    currentInteractable.ShowInteractableUI();
                 }
             }
             
@@ -35,10 +38,11 @@ public class Interactor : MonoBehaviour
 
         }
 
-        if (currentMineable != null)
+        if (currentInteractable != null)
         {
-            currentMineable.OnHoverExit();
-            currentMineable = null;
+            currentInteractable.OnHoverExit();
+            currentInteractable.HideInteractableUI();
+            currentInteractable = null;
         }
 
     }
